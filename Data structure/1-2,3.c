@@ -40,6 +40,6 @@ int main()
 		a[i] = rand(); //rand함수로 a와 b배열 임의의 값으로 초기화
 		b[i] = rand();
 	}
-	matrix_diif(a, b, c); //임의로 선언된 배열 a,b,c배열 전달
+	//matrix_diif(a, b, c); //임의로 선언된 배열 a,b,c배열 전달
 	max_min(a); //임의로 선언된 배열 a배열 전달
 }
