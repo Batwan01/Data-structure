@@ -8,11 +8,10 @@ int search(int* num, int a, int *p) //num배열은 포인터로 받고, main함수에 있는 a
 	{
 		if ((*(num + i)) == a) //num[i]의 값이 찾는값(a)와 같으면 printf로 출력 후 break
 		{
-			*p = i; //p의 주소에 i를 저장
-			break;
+			return *p = i; //p의 주소에 i를 저장
 		}
 	}
-	pritf("찾고자 하는 값이 존재하지 않습니다."); //오류 메세지
+	return *p = NULL; //만약 찾는 값이 없다면 NULL값 저장
 }
 
 int main()
@@ -21,5 +20,6 @@ int main()
 	int num[10] = { 23, 45, 12, 34, 65, 25, 89, 61, 26, 11 }; //num 배열에 임의의 숫자 선언
 	scanf("%d", &a); //찾는값 입력 받기
 	search(num, a, &p); //num배열의 값과 찾는 값 입력 &p은 값은 main에서 p의 주소를 가져오기 위함
-	printf("%d의 값은 num[%d]에 위치하고 있습니다.", a, p);
+	if(p == NULL) printf("찾고자 하는 값이 존재하지 않습니다."); //오류 메세지
+	else printf("%d의 값은 num[%d]에 위치하고 있습니다.", a, p); //찾는 값의 위치 출력
 }
