@@ -8,19 +8,18 @@ void main()
 	int* pi;
 	float* pf;
 	double* pd;
-	pc = (char*)malloc(100 * sizeof(char));
-	pi = (int*)malloc(100 * sizeof(int));
-	pf = (float*)malloc(100 * sizeof(float));
-	pd = (double*)malloc(100 * sizeof(double));
-
-	if (pc == NULL) {
+	pc = (char*)malloc(100 * sizeof(char)); //문자(1byte)*100 = 100byte 할당
+	pi = (int*)malloc(100 * sizeof(int)); //정수(4byte)*100 = 400byte 할당
+	pf = (float*)malloc(100 * sizeof(float)); //float(4byte)*100 = 400byte 할당
+	pd = (double*)malloc(100 * sizeof(double)); //double(8byte)*100 = 800byte 할당
+	if (pc == NULL) { //만약 할당이 안 되었으면 오류 메세지 출력
 		printf("문자 메모리 할당 실패");
 		exit(1);
 	}
 	else
 	{
 		*pc = 100; //포인터값에 100 대입
-		printf("c = %d\n", *pc); //출력
+		printf("pc = %d\n", *pc); //출력
 	}
 	if (pi == NULL) {
 		printf("정수 메모리 할당 실패");
@@ -29,7 +28,7 @@ void main()
 	else
 	{
 		*pi = 100; //포인터값에 100 대입
-	printf("i = %d\n", *pi); //출력
+	printf("pi = %d\n", *pi); //출력
 	}
 	if (pf == NULL) {
 		printf("float 메모리 할당 실패");
@@ -38,7 +37,7 @@ void main()
 	else
 	{
 		*pf = 100; //포인터값에 100 대입
-		printf("f = %f\n", *pf); //출력
+		printf("pf = %f\n", *pf); //출력
 	}
 	if (pd == NULL) {
 		printf("double 메모리 할당 실패");

@@ -11,8 +11,12 @@ void main()
 {
 	int i;
 	test_str* ptest;
-	ptest = (double*)malloc(sizeof(test_str));
-	ptest->data = 100;
+	ptest = (double*)malloc(sizeof(test_str)); //구조체 test 1개 공간 할당
+	for (i = 0; i < 5; i++)
+	{
+		printf("%d", ptest[i].data);
+	}
+	ptest->data = 100; //구조체 test의 data에 100저장
 	printf("%d", ptest->data);
 	free(ptest);
 }
