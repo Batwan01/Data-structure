@@ -46,6 +46,7 @@ void Adddata(List* list, char* names) {
 		add->next = list->head->next;
 		add->prev = list->head;
 		list->head->next = add;
+		list->first = add; //첫번째 값
 	}
 	list->count++;
 }
@@ -53,14 +54,13 @@ void Freelist(List* list) { //head와 tail값 free하기
 	Node* heads = list->head;
 	Node* tails = list->tail;
 	list->head->next->prev = list->tail->prev; //head다음 첫 번쨰 값의 prev는 tail의 prev값
-	list->tail->prev->next = list->tail->next;//tail뒤의 값의 next값은 tail의 next값
-	Node *first = list->head->next; //첫번째 노드 first
+	list->tail->prev->next = list->head->next;//tail뒤의 값의 next값은 tail의 next값
 }
 
 void Viewall(List* list) {
 	Node* check = list->first;
 	int i = 0;
-	while (i!=15)
+	while (i!=list->count)
 	{
 		printf("%s",check->name);
 		check = check->next;
