@@ -82,3 +82,5 @@ void main()
 	Freelist(&list);
 	Viewall(&list);
 }	
+//오늘 할 거 rand함수로 랜덤 사람 뽑기, n번 입력받아서 사람 없애기, 남은사람 실시간으로 출력하기
+//
