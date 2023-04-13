@@ -69,5 +69,20 @@
     <ClCompile Include="P135-17.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="idontknow.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="minjoo.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="find.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="find1.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="solution.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
