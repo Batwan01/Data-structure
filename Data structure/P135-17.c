@@ -112,7 +112,7 @@ void Remove(List* list) {
 			printf("제거 될 사람 : %s\n", person->name);
 			person->next->prev = person->prev;
 			person->prev->next = person->next;
-			person = person->next;
+			person = person->prev;
 			i = 0;
 		}
 		printf("남은 사람 : ");
