@@ -4,25 +4,25 @@
 #include <time.h>
 
 typedef struct Node { //노드 생성
-	char *name;
+	char* name;
 	struct Node* next; //다음값
 	struct Node* prev; //이전값
 } Node;
 
 typedef struct List { //head와 tail 정의
-	Node* head; //첫 번째 값 가르킴
-	Node* tail; //마지막 값 가르킴
-	Node* first; //head, tail free되면 첫번째 위치가르킴
+	Node* head;
+	Node* tail;
+	Node* first;
 	int count;
 }List;
 
-Node* Newnode(char *names) //노드 생성
+Node* Newnode(char* names) //노드 생성
 {
 	Node* new = (Node*)malloc(sizeof(Node)); //구조체 1개 공간 할당
 	new->name = (char*)malloc(strlen(names) + 1); //이름수 만큼 공간 할당
 	strcpy(new->name, names); //new->name에 이름 저장
 	new->next = new->prev = NULL; //new 링크 초기화
-	return new;	
+	return new;
 }
 
 void Setnode(List* list) { //노드 초기설정
@@ -36,7 +36,7 @@ void Setnode(List* list) { //노드 초기설정
 }
 
 void Adddata(List* list, char* names) {
-	Node *add = Newnode(names);
+	Node* add = Newnode(names);
 	if (list->count == 0) { //첫번째 Add
 		add->next = list->head->next; //add의 다음은 head의 next
 		add->prev = list->head; //add의 prev은 head
@@ -53,8 +53,8 @@ void Adddata(List* list, char* names) {
 	list->count++; //노드수 저장
 }
 void Freelist(List* list) { //head와 tail값 free하기
-	Node* heads = list->head; //head설정
-	Node* tails = list->tail; //tial설정
+	Node* heads = list->head;
+	Node* tails = list->tail;
 	list->head->next->prev = list->tail->prev; //head다음 첫 번째 값의 prev는 tail의 prev값
 	list->tail->prev->next = list->head->next;//tail뒤의 값의 next값은 tail의 next값
 	free(heads);
@@ -63,7 +63,7 @@ void Freelist(List* list) { //head와 tail값 free하기
 
 void Randperson(List* list) {
 	Node* person = list->first;
-	int n = rand() % list->count; //랜덤함수의 값을 사람수(count)로 범위를 정함
+	int n = 2;
 	for (int i = 0; i < n; i++)
 	{
 		person = person->next; //뽑힌 사람 선발
@@ -76,9 +76,9 @@ void Viewall(List* list) {
 	Node* check = list->first; //첫 번째 사람
 	int i = 0;
 	printf("학생들 이름 : ");
-	while (i!=list->count) //학생수만큼 돌면 정지
+	while (i != list->count)
 	{
-		printf("%s ",check->name); //이름 출력
+		printf("%s ", check->name); //이름 출력
 		check = check->next; //다음 사람
 		i++;
 	}
@@ -86,51 +86,50 @@ void Viewall(List* list) {
 }
 
 void Remove(List* list) { //n번째 사람 제거
-	Node* person = list->first; //첫번째 값
-	Node* explain = person; //남은 사람 출력용
-	int n, j, i=0, t=0;
+	Node* person = list->first;
+	Node* explain = person;
+	int n, j, i = 0, t = 0;
 	printf("n을 입력하세요.(n번째 사람 제거) : ");
 	scanf("%d", &n);
 	while (list->count != 1) { //정렬 필요함
+		explain = list->first;
 		if (i == 0) { //시계방향
 			for (j = 0; j < n; j++)
 			{
-				person = person->next; //제거할 값 n번만큼 앞으로
+				person = person->next;
 			}
-			if (person == list->first) //first값이 제거 될 때
+			if (person == list->first)
 			{
-				list->first = person->next; //first값 next값 설정
-				list->first->prev = person->prev; //first의 prev값 설정
-				explain = list->first; //출력용도 first값 적용
+				list->first = person->next;
+				list->first->prev = person->prev;
 			}
-			list->count--; //사람 수 제거
+			list->count--;
 			printf("제거 될 사람 : %s\n", person->name);
-			person->next->prev = person->prev; //제거대상의 앞 뒤 연결
+			person->next->prev = person->prev;
 			person->prev->next = person->next;
-			person = person->next; //제거대상의 다음사람이 기준
+			person = person->next;
 			i = -1;
 		}
 		else { //반시계방향
 			for (j = 0; j < n; j++)
 			{
-				person = person->prev; //반시계 방향으로 n번 뒤로
+				person = person->prev;
 			}
-			if (person == list->first) //first값이 제거될 때
+			if (person == list->first)
 			{
-				list->first = person->next; //first의 next설정
-				list->first->prev = person->prev; //first의 prev값 설정
-				explain = list->first; //출력용도 설정
+				list->first = person->next;
+				list->first->prev = person->prev;
 			}
-			list->count--; //사람 수 감소
+			list->count--;
 			printf("제거 될 사람 : %s\n", person->name);
-			person->next->prev = person->prev; //제거대상의 앞 뒤 연결
+			person->next->prev = person->prev;
 			person->prev->next = person->next;
-			person = person->prev; //제거대상의 다음사람이 기준
+			person = person->prev;
 			i = 0;
 		}
 
 		printf("남은 사람 : ");
-		while (t != list->count) { //남은 사람 이름 출력
+		while (t != list->count) {
 			printf("%s ", explain->name);
 			explain = explain->next;
 			t++;
@@ -149,7 +148,7 @@ void main() {
 	Setnode(&list); //초기 설정
 	printf("학생의 이름을 입력하세요.(종료를 원하면 0을 입력하세요.)\n");
 	while (1) {
- 		scanf("%s", names);
+		scanf("%s", names);
 		if (names[0] == '0') break; //0 입력하면 종료
 		Adddata(&list, names); //노드 생성 및 이름 입력
 	}
@@ -157,4 +156,4 @@ void main() {
 	Randperson(&list); //무작위 사람 뽑기
 	Viewall(&list); //모든 값 보기
 	Remove(&list); //사람 제거
-}	
+}

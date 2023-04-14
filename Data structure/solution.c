@@ -46,7 +46,7 @@ Node* head_tail_Remove_ReturnFirst(Node* head, Node* tail) {
 Node* Random_Choice_Student(Node* First, int Number_Of_Student) {
     srand((int)time(NULL)); // 난수 생성
     // 먼저 입력된 이름 부터 그 다음 이름 순으로 1, 2, 3, ... 별칭 지정한다고 가정
-    int choice = ((rand() % Number_Of_Student) + 1); // 뽑힐 사람 결정
+    int choice = 2;
     Node* target = First;
     for (int i = 1; i < choice; i++) {
         target = target->next;
