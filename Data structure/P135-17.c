@@ -42,6 +42,7 @@ void Adddata(List* list, char* names) {
 		add->prev = list->head; //add의 prev은 head
 		list->head->next = add; //head의 next는 add
 		list->tail->prev = add; //tail의 prev은 add
+		list->first = add; //첫 번째값 정함(Freelist 사용을 위함)
 	}
 	else { //2번 이상 Add
 		add->next = list->head->next; //add의 next는 head의 next
@@ -63,7 +64,7 @@ void Freelist(List* list) { //head와 tail값 free하기
 
 void Randperson(List* list) {
 	Node* person = list->first;
-	int n = rand() % list->count; //랜덤함수의 값을 사람수(count)로 범위를 정함
+	int n = rand() % list->count+1; //랜덤함수의 값을 사람수(count)로 범위를 정함
 	for (int i = 0; i < n; i++)
 	{
 		person = person->next; //뽑힌 사람 선발
