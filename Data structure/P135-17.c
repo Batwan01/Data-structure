@@ -87,10 +87,11 @@ void Viewall(List* list) {
 
 void Remove(List* list) {
 	Node* person = list->first;
+	Node* exception = list->first;
 	int n, j, i=0, t=0;
 	printf("n을 입력하세요.(n번째 사람 제거) : ");
 	scanf("%d", &n);
-	while (list->count != 1) {
+	while (list->count != 1) { //정렬 필요함
 		if (i == 0) { //시계방향
 			for (j = 0; j < n; j++)
 			{
@@ -112,9 +113,10 @@ void Remove(List* list) {
 			printf("제거 될 사람 : %s\n", person->name);
 			person->next->prev = person->prev;
 			person->prev->next = person->next;
-			person = person->prev;
+			person = person->next;
 			i = 0;
 		}
+
 		printf("남은 사람 : ");
 		while (t != list->count) {
 			printf("%s ", person->name);
@@ -140,7 +142,7 @@ void main() {
 		Adddata(&list, names); //노드 생성 및 이름 입력
 	}
 	Freelist(&list); //head, tail값 free
-	Viewall(&list); //모든 값 보기
 	Randperson(&list); //무작위 사람 뽑기
+	Viewall(&list); //모든 값 보기
 	Remove(&list); //사람 제거
 }	
