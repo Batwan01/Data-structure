@@ -89,6 +89,7 @@ void Viewall(List* list) {
 void Remove(List* list) { //n번째 사람 제거
 	Node* person = list->first; //첫번째 값
 	Node* explain = person; //남은 사람 출력용
+	Node* frees = person; //free 용도
 	int n, j, i=0, t=0;
 	printf("n을 입력하세요.(n번째 사람 제거) : ");
 	scanf("%d", &n);
@@ -108,7 +109,9 @@ void Remove(List* list) { //n번째 사람 제거
 			printf("제거 될 사람 : %s\n", person->name);
 			person->next->prev = person->prev; //제거대상의 앞 뒤 연결
 			person->prev->next = person->next;
+			frees = person; //제거 대상을 frees에 저장
 			person = person->next; //제거대상의 다음사람이 기준
+			free(frees); //제거 대상을 free
 			i = -1;
 		}
 		else { //반시계방향
@@ -126,10 +129,11 @@ void Remove(List* list) { //n번째 사람 제거
 			printf("제거 될 사람 : %s\n", person->name);
 			person->next->prev = person->prev; //제거대상의 앞 뒤 연결
 			person->prev->next = person->next;
+			frees = person; //제거 대상을 frees에 저장
 			person = person->prev; //제거대상의 다음사람이 기준
+			free(frees); //제거 대상을 free
 			i = 0;
 		}
-
 		printf("남은 사람 : ");
 		while (t != list->count) { //남은 사람 이름 출력
 			printf("%s ", explain->name);
@@ -140,6 +144,7 @@ void Remove(List* list) { //n번째 사람 제거
 		printf("\n");
 	}
 	printf("최종 남은 학생 : %s", person->name);
+	free(person);
 }
 
 void main() {

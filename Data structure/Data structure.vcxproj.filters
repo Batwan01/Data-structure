@@ -87,5 +87,8 @@
     <ClCompile Include="Memo.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="123.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
