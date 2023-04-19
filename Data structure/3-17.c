@@ -6,8 +6,18 @@ void main()
 {
 	int* pi;
 	pi = (int*)malloc(100 * sizeof(char));
-	//100바이트의 대한 메모리를 할당했기 때문에 정수는 400바이트가 필요하기 때문에 100개의 정수를 저장하기에는 공간이 부족
-	*pi = 25600000000;
-	printf("c = %d\n", *pi);
+	if (pi == NULL) {
+		printf("메모리 할당 실패");
+		exit(1);
+	}
+	else
+	{
+		*pi = 100; //포인터값에 100 대입
+		printf("pi = %d\n", *pi); //출력
+	}
+	for (int i = 0; i < 30; i++)
+	{
+		printf("%d ", *(pi + i));
+	}
 	free(pi);
 }
