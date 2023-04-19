@@ -15,3 +15,22 @@ typedef struct List { //head와 tail 정의
 	Node* first; //head, tail free되면 첫번째 위치가르킴
 	int count;
 }List;
+
+void insert_node(Node* before, Node* new) {
+	new->prev = before;
+	new->next = before->next;
+	before->next = new;
+	new->next->prev = new;
+}
+
+Node* delete_node(List* before, Node* delete) {
+	if (before == NULL) {
+		delete->next->prev = before->tail;
+		before->tail->next = delete->next;
+	}
+}
+
+int main() {
+	Node node, new;
+	insert_node(&node, &new);
+}
