@@ -25,22 +25,23 @@ Node* newnode(int score1, int score2, int score3) {
 	return new;
 }
 
-void add(Link *sum, Node *new) {
-	if (sum->head == NULL) {
-		sum->head = new;
-		sum->length++;
+void add(Link **sum, Node *new) {
+	if ((*sum)->head == NULL) {
+		(*sum)->head = new;
+		new->next = NULL;
+		(*sum)->length++;
 		//printf("sum->head 작동해떠염\n");
 	}
 	else {
-		new->next = sum->head->next;
-		sum->head->next = new;
-		sum->length++;
+		new->next = (*sum)->head->next;
+		(*sum)->head->next = new;
+		(*sum)->length++;
 		//printf("sum->head else 작동해떠염\n");
 	}
 }
 
-void viewall(Link* sum) {
-	Node* all = sum->head;
+void viewall(Link** sum) {
+	Node* all = (*sum)->head;
 	//printf("vieall에 들어와떠염");
 	while (all) {
 		printf("성적 : %d %d %d\n", all->socre[0], all->socre[1], all->socre[2]);
@@ -49,9 +50,11 @@ void viewall(Link* sum) {
 }
 
 int main() {
-	Link *sum;
+	Link a;
+	Link *sum=&a;
+
 	int i = 0, score1, score2, score3;
-	start(&sum);
+	start(sum);
 	printf("학생의 성적입력\n");
 	while (i != 5) {
 		scanf("%d %d %d", &score1, &score2, &score3);
@@ -59,4 +62,5 @@ int main() {
 		i++;
 	}
 	viewall(&sum);
+	return 0;
 }
