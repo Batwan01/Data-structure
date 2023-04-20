@@ -23,7 +23,8 @@ void insert_node(Node* before, Node* new) {
 	new->next->prev = new;
 }
 
-Node* delete_node(List* before, Node* delete) {
+Node* delete_node(List* before, List* delete) {
+	Node * 
 	if (before == NULL) {
 		delete->next->prev = before->tail;
 		before->tail->next = delete->next;
