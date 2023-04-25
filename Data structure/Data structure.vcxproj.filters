@@ -102,5 +102,8 @@
     <ClCompile Include="dohyun.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ques.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
