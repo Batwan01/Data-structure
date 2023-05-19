@@ -5,7 +5,7 @@
 
 typedef struct ArrayStack {
 	int top; //꼭대기
-	int in_str[100]; //배열의 크기 100
+	char in_str[100]; //배열의 크기 100
 } ArrayStack;
 
 int palindrome(char in_str[]) {
