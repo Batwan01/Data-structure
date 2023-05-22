@@ -19,8 +19,10 @@ int check(Stack* s) {
 		else continue;
 	}
 	for (int i = 0; i < len; i++) {
-		if (s->word[i] != s->word[s->top--]) return -1;
-		if (i == s->top);
+		printf("%c", s->word[i]);
+		/*if (s->word[i] == s->word[s->top--]) continue;
+		else return -1;
+		if (i > s->top) break;*/
 	}
 	return 0;
 }
