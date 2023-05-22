@@ -4,9 +4,30 @@
 
 typedef struct Stack {
 	int top;
-	char 
-};
+	char word[100];
+} Stack;
+
+int check(Stack* s) {
+	char ch;
+	s->top = -1;
+	int len = strlen(s->word);
+	for (int i = 0; i < len; i++) {
+		ch = s->word[i];
+		if (ch == '(' || ch == ')' || ch == '{' || ch == '}' || ch == '[' || ch == ']') {
+			s->word[++s->top] = ch;
+		}
+		else continue;
+	}
+	for (int i = 0; i < len; i++) {
+		if (s->word[i] != s->word[s->top--]) return -1;
+		if (i == s->top);
+	}
+	return 0;
+}
 
 int main(void) {
-
+	Stack s;
+	scanf("%[^\n]s", s.word);
+	int a = check(&s);
+	printf("%d", a);
 }
