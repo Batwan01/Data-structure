@@ -13,12 +13,11 @@ int check(Stack* s) {
 	int len = strlen(s->word);
 	for (int i = 0; i < len; i++) {
 		ch = s->word[i];
-		if (ch == '(' || ch == ')' || ch == '{' || ch == '}' || ch == '[' || ch == ']') {
-			s->word[++s->top] = ch;
+		if (ch == '(' || ch == ')' || ch == '{' || ch == '}' || ch == '[' || ch == ']') { //괄호면 저장
+			s->word[++s->top] = ch; //top +1하고 저장
 		}
-		else continue;
 	}
-	for (int i = 0; i < len; i++) {
+	for (int i = 0; i < s->top+1; i++) {
 		printf("%c", s->word[i]);
 		/*if (s->word[i] == s->word[s->top--]) continue;
 		else return -1;
@@ -31,5 +30,5 @@ int main(void) {
 	Stack s;
 	scanf("%[^\n]s", s.word);
 	int a = check(&s);
-	printf("%d", a);
+	//printf("%d", a);
 }
