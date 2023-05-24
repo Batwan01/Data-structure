@@ -32,12 +32,11 @@ char pop(Stack* s) {
 int check(Stack* s) {
 	int answer = 0;
 	char ch;
-	char word[100];
 	int len = strlen(s->word); //길이 저장
 	for (int i = 0; i <=len; i++) {
 		ch = s->word[i]; //비교 문자열 저장
 
-		switch (ch)
+		switch (ch) //괄호가 아니면 저장X
 		{
 			case '(': //열린 괄호면 push
 				push(s, ch);
@@ -49,7 +48,7 @@ int check(Stack* s) {
 				push(s, ch);
 				break;
 			case ')': //닫힌 괄호면 pop
-				if (ch - 1 == pop(s)) { answer++; continue; } //맞은 횟수 적립(만약 0이면 작동을 하지 않았다는 의미)
+				if (ch - 1 == pop(s)) { answer++; continue; } //횟수 적립(만약 0이면 작동을 하지 않았다는 의미)
 				else return -1;
 			case '}':
 				if (ch - 2 == pop(s)) { answer++; continue; }
@@ -58,7 +57,6 @@ int check(Stack* s) {
 				if (ch - 2 == pop(s)) { answer++; continue; }
 				else return -1;
 		}
-		
 	}
 	if (s->top != -1) return -1; //스택이 남아있으면 오류
 	if (answer > 0) return 0; //case가 작동했으면 정답
@@ -69,7 +67,7 @@ int main(void) {
 	Stack s;
 	init(&s); //top 초기화
 
-	scanf("%[^\n]s", s.word);
+	scanf("%[^\n]s", s.word); //공백도 포함하여 입력받음
 	int a = check(&s);
 	if (a == -1) printf("올바르지 않습니다.");
 	else printf("올바릅니다.");
