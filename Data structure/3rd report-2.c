@@ -58,7 +58,9 @@ int check(Stack* s) {
 				if (ch - 2 == pop(s)) { answer++; continue; }
 				else return -1;
 		}
+		
 	}
+	if (s->top != -1) return -1; //스택이 남아있으면 오류
 	if (answer > 0) return 0; //case가 작동했으면 정답
 	else return -1;//0이면 오류
 }
