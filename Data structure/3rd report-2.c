@@ -9,44 +9,64 @@ typedef struct Stack {
 	char word[100];
 } Stack;
 
+void init(Stack* s) {
+	s->top = -1;
+}
+
+void push(Stack* s, char data) {
+	if (s->top == 100) { //포화상태 확인
+		printf("포화상태입니다.");
+		exit(1);
+	}
+	else s->word[++s->top] = data; //top을 +1하고 data저장
+}
+
+char pop(Stack* s) {
+	if (s->top == -1) { //공백인지 확인(만약 공백이면 비교값이 없는 것이기 때문에 오류)
+		printf("올바르지 않습니다.");
+		exit(1);
+	}
+	else return s->word[s->top--]; //값을 반환하고 top -1
+}
+
 int check(Stack* s) {
-	int count = 0,check = 0;
+	int answer = 0;
 	char ch;
 	char word[100];
-	s->top = -1;
-	int len = strlen(s->word);
-	for (int i = 0; i < len; i++) {
-		ch = s->word[i];
-		if (ch == '(' || ch == ')' || ch == '{' || ch == '}' || ch == '[' || ch == ']') { //괄호면 저장
-			s->word[++s->top] = ch; //top +1하고 저장
+	int len = strlen(s->word); //길이 저장
+	for (int i = 0; i <=len; i++) {
+		ch = s->word[i]; //비교 문자열 저장
+
+		switch (ch)
+		{
+			case '(': //열린 괄호면 push
+				push(s, ch);
+				break;
+			case '{':
+				push(s, ch);
+				break;
+			case '[':
+				push(s, ch);
+				break;
+			case ')': //닫힌 괄호면 pop
+				if (ch - 1 == pop(s)) { answer++; continue; } //맞은 횟수 적립(만약 0이면 작동을 하지 않았다는 의미)
+				else return -1;
+			case '}':
+				if (ch - 2 == pop(s)) { answer++; continue; }
+				else return -1;
+			case ']':
+				if (ch - 2 == pop(s)) { answer++; continue; }
+				else return -1;
 		}
 	}
-	if (s->top % 2 == 0) return -1; //짝수면 틀림
-	while (s->top!=-1) {
-		ch = s->word[s->top--]; //ch에 저장
-		check = 0;
-		count = 1;
-		if (ch == '(') {
-			check = s->top+2;
-			while (s->word[check] != " ") {
-				check++;
-				count++;
-			}
-			if (s->word[s->top + count] == ch + 1) {
-				printf("() 맞음");
-			}
-			else return - 1;
-		}
-		else if (ch == '{' || ch == '[') {
-			if (s->word[count] == ch + 2) printf("%c %c맞음", ch, ch + 2);
-			else return - 1;
-		}
-	}
-	return 0;
+	if (answer > 0) return 0; //case가 작동했으면 정답
+	else return -1;//0이면 오류
 }
 
 int main(void) {
 	Stack s;
+	init(&s); //top 초기화
+
 	scanf("%[^\n]s", s.word);
 	int a = check(&s);
 	if (a == -1) printf("올바르지 않습니다.");
