@@ -114,5 +114,11 @@
     <ClCompile Include="dohyun-2.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="3rd report-3.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="dragon.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
