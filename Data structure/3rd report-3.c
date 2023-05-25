@@ -47,7 +47,7 @@ int main(void) {
 	Person M,F;
 	char nick[100];
 	char gen=' ';
-	init(&M);
+	init(&M); //초기화
 	init(&F);
 	int a;
 	printf("미팅 주선 프로그램입니다.(종료하려면 0을 입력해주세요.)\n");
