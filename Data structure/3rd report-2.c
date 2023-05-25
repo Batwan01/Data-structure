@@ -66,7 +66,7 @@ int check(Stack* s) {
 int main(void) {
 	Stack s;
 	init(&s); //top 초기화
-
+	printf("괄호를 입력하세요. : ");
 	scanf("%[^\n]s", s.word); //공백도 포함하여 입력받음
 	int a = check(&s);
 	if (a == -1) printf("올바르지 않습니다.");
