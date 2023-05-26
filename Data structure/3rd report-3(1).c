@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define max 3
+#define max 100
 
 typedef struct Person {
 	char name[max][100];
@@ -15,6 +15,10 @@ void init(Person* p) { //큐 초기화
 
 int full(Person* p) { //초과됐는지 확인
 	return (p->rear + 1) % max == p->front;
+}
+
+int empty(Person* p) { //비어있는지 확인
+	return p->front == p->rear;
 }
 
 int add(Person* p, char* nick) { //데이터 추가
@@ -34,10 +38,6 @@ void delete(Person* M, Person* F) { //데이터 출력
 	printf("커플이 탄생했습니다! %s과 %s\n\n", M->name[M->front], F->name[F->front]);
 }
 
-int empty(Person* p) { //비어있는지 확인
-	return p->front == p->rear;
-}
-
 void meeting(Person* M, Person* F) { //짝이 맞는지 확인
 	if (empty(M) == 0 && empty(F) == 0) delete(M, F);
 	else printf("아직 대상자가 없습니다. 기다려 주십시오.\n\n");
@@ -47,10 +47,10 @@ int main(void) {
 	Person M,F;
 	char nick[100];
 	char gen=' ';
-	init(&M); //초기화
+	init(&M); //초기화A
 	init(&F);
 	int a;
-	printf("미팅 주선 프로그램입니다.(종료하려면 0을 입력해주세요.)\n");
+	printf("미팅 주선 프로그램입니다.(종료하려면 0을 입력해주세요.)\n\n");
 	while (1) {
 		printf("고객이름 : "); //이름 입력
 		scanf("%s", nick);
