@@ -7,7 +7,7 @@ typedef struct Person {
 	int *link;
 } Person;
 
-typedef struct linkperson {
+typedef struct linkperson { //front, rear포인터
 	Person* front;
 	Person* rear;
 } linkperson;
@@ -32,19 +32,27 @@ int add(linkperson* p, char* nick) { //데이터 추가
 	else {
 		strcpy(new->name, nick);
 		new->link = NULL;
-		if (empty(p)) p->front = new;
-		else p->rear->link = new;
+		if (empty(p)) p->front = new; //비어있으면 front설정
+		else p->rear->link = new; //rear설정
 		p->rear = new;
 		return 0;
 	}
 }
 
 void delete(linkperson* M, linkperson* F) { //데이터 출력
-	
+	Person* del_M = M->front; //지울 사람
+	Person* del_F = F->front; 
+	printf("커플이 탄생했습니다! %s과 %s\n\n", del_M, del_F);
+	M->front = del_M->link; //front 변경
+	F->front = del_F->link;
+	if (empty(M)) M->rear = NULL; //비어있으면 rear=NULL
+	if (empty(F)) F->rear = NULL;
+	free(del_M);
+	free(del_F);
 }
 
 void meeting(linkperson* M, linkperson* F) { //짝이 맞는지 확인
-	if (empty(M) == 0 && empty(F) == 0) delete(M, F);
+	if (empty(M) == 0 && empty(F) == 0) delete(M, F); //둘 다 비어있지 않으면 실행
 	else printf("아직 대상자가 없습니다. 기다려 주십시오.\n\n");
 }
 
@@ -52,7 +60,7 @@ int main(void) {
 	linkperson M, F;
 	char nick[100];
 	char gen = ' ';
-	init(&M); //초기화A
+	init(&M); //초기화
 	init(&F);
 	int a;
 	printf("미팅 주선 프로그램입니다.(종료하려면 0을 입력해주세요.)\n\n");
