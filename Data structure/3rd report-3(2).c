@@ -72,9 +72,9 @@ int main(void) {
 		printf("성별을 입력하세요(f or m) "); //성별 입력
 		scanf(" %c", &gen);
 		if (gen == 'm') { //m일 때 남자 데이터 추가
-			a = add(&M, nick);
-			if (a == 0) meeting(&M, &F);
-			else printf("인원이 초과되었습니다.\n\n");
+			a = add(&M, nick); //데이터 추가
+			if (a == 0) meeting(&M, &F); //짝 확인
+			else printf("인원이 초과되었습니다.\n\n"); //큐가 초과되었을 때
 		}
 		else if (gen == 'f') { //f일 때 여자 데이터 추가
 			a = add(&F, nick);
