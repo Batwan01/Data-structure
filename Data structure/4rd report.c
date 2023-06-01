@@ -23,8 +23,8 @@ void add(Tnode** root, char* word, int lines) { //노드 추가
     Tnode* parent = NULL;
     while (search) {
         if (strcmp(word, search->data) == 0) { //같은 값일 때
-            if (search->line[(search->try) - 1] != lines) search->line[search->try++] = lines;
-            else search->try++;
+            if (search->line[search->try - 1] == lines) search->try++; //이전값과 같으면 횟수만 누적
+            else search->line[search->try++] = lines;
             return;
         }
         parent = search;
@@ -38,21 +38,25 @@ void add(Tnode** root, char* word, int lines) { //노드 추가
         exit(1);
     }
     strcpy(new->data, word);
-    new->try = 0;
-    new->line[new->try++] = lines;
-    new->left = new->right = NULL;
+    new->try = 0; //횟수 초기화
+    new->line[new->try++] = lines; //줄 저장
+    new->left = new->right = NULL; //링크 초기화
     if (!parent) *root = new; //빈 트리
     else if (0 > strcmp(new->data, parent->data)) parent->left = new; //data가 빠르면 left 
     else parent->right = new;
 }
 
-void inorder(Tnode* root) {
+int sum = 0; //전역 변수
+
+void inorder(Tnode* root) { //중위 순회
     if (root) {
         inorder(root->left);
-        printf("%s ", root->data);
-        printf("%d ", root->try);
-        for (int i = 0; i < root->try; i++) {
-            if (root->line[i] != ' ') printf("%d ", root->line[i]);
+        printf("%s\t", root->data);
+        printf("%d\t", root->try);
+        sum += root->try; //계 저장
+        for (int i = 0; i < root->try; i++) { //try만큼 반복 출력
+            if (i != 0 && root->line[i] > 0) printf(",");
+            if (root->line[i] > 0) printf("%d", root->line[i]);
         }
         printf("\n");
         inorder(root->right);
@@ -85,11 +89,13 @@ int main(void) {
 
         while (word != NULL) { // 줄에서 한 단어씩 추출하기
             add(&(root.root), word, lines);
-            word = strtok(NULL, " \t\n,.?");
+            word = strtok(NULL, " \t\n,.'?");
         }
     }
-    inorder(root.root); //중위 순회
+    printf("단어\t횟수\t줄\n");
 
+    inorder(root.root); //중위 순회
+    printf("계\t%d", sum);
 
     fclose(file); // 파일 닫기
     return 0;
